@@ -18,6 +18,7 @@ msg_session_cancelled =   'session_cancelled'
 msg_kicked_from_session = 'kicked_from_session'
 msg_send_message =        'send_message'
 msg_receive_message =     'receive_message'
+msg_receive_session =     'receive_session'
 msg_get_user_info =       'get_user_info'
 
 # --------------------------------------------------------------------------
@@ -43,6 +44,8 @@ IsFull = (type, size) ->
 # Message Template
 # --------------------------------------------------------------------------
 # { type: 'type', user: 'facebook_id', ... }
+# OR
+# { type: 'type', session: 'session_identifier', user: 'facebook_id', ... }
 
 # --------------------------------------------------------------------------
 # Client Events
@@ -65,8 +68,14 @@ pubnub.subscribe
           message.session
 
       when msg_connect_client then do ->
-        # TODO: create user if he doesn't exist yet
-        console.log message.identifier, ' connected!'
+        User.count
+          identifier: message.user, (err, count) ->
+            if err
+              ServerError err
+            else if count == 0
+              User.create
+                identifier: message.user, (err, user) ->
+                  ServerError err if err
 
       when msg_get_sessions then do ->
         Session.find message.data.settings, (err, sessions) ->
@@ -105,7 +114,15 @@ pubnub.subscribe
           if err
             ServerError err
           else
-            session.users.push(message.user).unique()
+            session.users.push message.user
+            channel: channel_server
+              message:
+                user: message.user
+                session: message.session
+                type: msg_receive_session
+                messages: session
+              callback: SentSuccessful
+              error: SentError
 
       when msg_leave_session, msg_remove_user then do ->
         Session.findById message.session, (err, session) ->
@@ -128,19 +145,43 @@ pubnub.subscribe
                 user isnt message.user
               if message.type is msg_remove_user
                 pubnub.publish
-                channel: channel_server
-                message:
-                  user: message.user
-                  type: msg_kicked_from_session
-                  session: session
-                callback: SentSuccessful
-                error: SentError
+                  channel: channel_server
+                  message:
+                    user: message.user
+                    type: msg_kicked_from_session
+                    session: session
+                  callback: SentSuccessful
+                  error: SentError
 
       when msg_send_message then do ->
-        console.log message
+        Session.findById message.session, (err, session) ->
+          if err
+            ServerError err
+          else
+            session.messages.push(message.data)
+            pubnub.publish
+              channel: channel_server
+              message:
+                user: message.user
+                session: message.session
+                type: msg_receive_message
+                data: message.data
+              callback: SentSuccessful
+              error: SentError
 
       when msg_get_user_info then do ->
-        console.log message
+        User.find identifier: message.user, (err, user) ->
+          if err
+            ServerError err
+          else
+            pubnub.publish
+              channel: channel_server
+              message:
+                user: message.user
+                type: msg_get_user_info
+                info: user
+              callback: SentSuccessful
+              error: SentError
 
       else
         console.log 'Unknown client message \'', message, '\' received.'

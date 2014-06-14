@@ -3,8 +3,8 @@ mongoose = require('mongoose')
 Schema = mongoose.Schema
 
 UserSchema = new Schema(
-  facebookIdentifier:
-    type: String
+  identifier:
+    type: Number
     unique: true
     requird: true
   preferences:
@@ -29,12 +29,8 @@ UserSchema = new Schema(
       fieldType:
         type: String
         enum: ['H', 'G', 'C']
-      balls:
-        type: Number
-        min: 0
-      rackets:
-        type: Number
-        min: 0
+      balls: Boolean
+      rackets: Boolean
       skillLevel:
         type: Number
         min: 0
