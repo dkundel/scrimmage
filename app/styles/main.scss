@@ -1,10 +1,9 @@
 $icon-font-path: "/bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/";
-
-@import 'bootstrap-sass-official/vendor/assets/stylesheets/bootstrap';
-
 $fa-font-path: "/bower_components/font-awesome/fonts";
-@import "font-awesome/scss/font-awesome";
 
+@import "font-awesome/scss/font-awesome";
+@import 'bootstrap-sass-official/vendor/assets/stylesheets/bootstrap';
+@import 'find';
 @import 'variables';
 
 .browsehappy {
