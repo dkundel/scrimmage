@@ -5,7 +5,7 @@ Schema = mongoose.Schema
 
 SessionSchema = new Schema(
   identifier:
-    type: Objectid
+    type: Schema.Types.ObjectId
     required: true
     unique: true
   description: String
