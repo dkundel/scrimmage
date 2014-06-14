@@ -1,0 +1,14 @@
+.chat-messages {
+  .name {
+    font-weight: bold;
+  }
+  p:nth-child(even) {
+    .name {
+      color: $brand-success;
+    }
+  }
+}
+
+.margin-row {
+  margin-top: 2rem;
+}

@@ -11,7 +11,7 @@ angular.module('scrimmageApp')
     @applyChanges = () =>
       $rootScope.$apply () =>
         $rootScope.loggedIn = loggedIn
-        $rootScope.user = user
+        $rootScope.userInfo = user
         window.FBUser = user
 
     @getUser = () =>

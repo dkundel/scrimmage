@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module('scrimmageApp')
-  .controller 'CreateMapCtrl', ($scope, $location, $http, Map) ->
+  .controller 'CreateMapCtrl', ($scope, $location, $http, Map, Event) ->
     $scope.addressResult = ''
     $scope.addressDetails = {}
     $scope.addressOptions = null
@@ -22,3 +22,11 @@ angular.module('scrimmageApp')
     $scope.cancel = () =>
       $location.path('/create')
       event.stopPropagation()
+
+    $scope.next = () =>
+      Event.submitEvent 
+        location: 
+          lat: $scope.addressDetails.geometry.location.k
+          long: $scope.addressDetails.geometry.location.A
+        time: $scope.time
+        date: $scope.date

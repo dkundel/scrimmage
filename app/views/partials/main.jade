@@ -14,8 +14,8 @@
           span Log In Via
           i.fa.fa-lg.pull-right.fa-facebook-square.fa-center
     .row.loggedIn(ng-class="{hidden: !loggedIn}")
-      .profile-image.col-xs-2
-        img(ng-src="https://graph.facebook.com/{{userInfo.id}}/picture?type=large").img-responsive.img-circle
+      .profile-image.col-xs-2.pull-left
+        img(ng-src="https://graph.facebook.com/{{userInfo.id}}/picture?width=200&height=200").img-responsive.img-circle.img-full
       .profile-content.col-xs-8
         p.lead
           span(ng-bind="userInfo.name")

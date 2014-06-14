@@ -37,12 +37,18 @@ angular.module('scrimmageApp', [
       .when '/profile',
         templateUrl: 'partials/profile'
         controller: 'ProfileCtrl'
+      .when '/event/:id/chat',
+        templateUrl: 'partials/chat'
+        controller: 'ChatCtrl'
+      .when '/event/:id/overview',
+        templateUrl: 'partials/overview'
+        controller: 'OverviewCtrl'
       .otherwise
         redirectTo: '/'
 
     $locationProvider.html5Mode true
 
-  .run ($rootScope, $location, $http, FBUser) ->
+  .run ($rootScope, $location, $http, FBUser, PubNub) ->
 
     $rootScope.$watch(() ->
       FBUser.loggedIn()
@@ -52,6 +58,7 @@ angular.module('scrimmageApp', [
       window.rootS = $rootScope
     )
 
+    PubNub.init()
 
     window.fbAsyncInit = () ->
       FB.init {

@@ -1,0 +1,34 @@
+.row.btn-success.top-row-shadow
+  .col-xs-12.col-md-10.col-md-offset-1
+    p.lead.text-center.scrimmage-title.
+      scrimmage
+
+.row
+  .col-xs-10.btn-danger.bottom-button
+    span Cancel
+  .col-xs-2.btn-success.bottom-button
+    span.fa.fa-white.fa-lg.fa-gear
+
+.row.margin-row
+  .col-xs-2.text-center(ng-repeat="part in participants", ng-class="{'col-xs-offset-2': (participants.length > 2 && $index === 0), 'col-xs-offset-4': (participants.length <= 2 && $index === 0)}")
+    img(ng-src="https://graph.facebook.com/{{part.id}}/picture?width=200&height=200").img-responsive.img-circle.img-full
+    br
+    span(ng-bind="part.first_name")
+
+.row.margin-row
+  .col-xs-12
+    .well.chat-messages
+      p(ng-repeat="m in messages")
+        span.name(ng-bind="m.user.first_name")
+        |: &nbsp;
+        span.message(ng-bind="m.content")
+
+
+.bottom-button-area
+  .row
+    .col-xs-12.btn-success.bottom-button
+      form(ng-submit="sendMsg()")
+        .input-group
+          input.form-control(type="chattext", placeholder="Type your message...", ng-model="newMessage")
+          span.input-group-btn
+            button.btn.btn-default(type="submit") Send

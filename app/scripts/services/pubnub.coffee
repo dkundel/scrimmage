@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module('scrimmageApp')
-  .service 'Pubnub', () ->
+  .service 'PubNub', () ->
     _publishKey = 'pub-c-b4096ce5-10e7-4674-9cbc-7f1393edf2be'
     _subscribeKey = 'sub-c-fafce722-f3bb-11e3-b429-02ee2ddab7fe'
 
