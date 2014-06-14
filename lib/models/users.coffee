@@ -3,59 +3,55 @@ mongoose = require('mongoose')
 Schema = mongoose.Schema
 
 UserSchema = new Schema(
-  facebookIdentifier: String
+  facebookIdentifier:
+    type: String
+    unique: true
+    requird: true
   preferences:
     search:
-      gameType: Number
-      userType: Number
+      gameType:
+        type: String
+        enum: ['C', 'R']
+      userType:
+        type: String
+        enum: ['S', 'D']
       location: String
-      radius: Number
+      radius:
+        type: Number
+        min: 1
     create:
-      gameType: Number
-      userType: Number
-      fieldType: Number
-      balls: Number
-      rackets: Number
-      skillLevel: Number
+      gameType:
+        type: String
+        enum: ['C', 'R']
+      userType:
+        type: String
+        enum: ['S', 'D']
+      fieldType:
+        type: String
+        enum: ['H', 'G', 'C']
+      balls:
+        type: Number
+        min: 0
+      rackets:
+        type: Number
+        min: 0
+      skillLevel:
+        type: Number
+        min: 0
+        max: 5
       description: String
       location: String
   trustPoints: Number
+  statistics:
+    won:
+      type: Number
+      min: 0
+    tied:
+      type: Number
+      min: 0
+    lost:
+      type: Number
+      min: 0
 )
-
-UserSchema.path('preferences.search.gameType').validate ((num) ->
-  num == 0 or num == 1
-), 'gameType must be either 0 or 1'
-
-UserSchema.path('preferences.search.userType').validate ((num) ->
-  num == 0 or num == 1
-), 'userType must be either 0 or 1'
-
-UserSchema.path('preferences.search.radius').validate ((num) ->
-  num >= 1
-), 'radius must be 1 or bigger'
-
-UserSchema.path('preferences.create.gameType').validate ((num) ->
-  num == 0 or num == 1
-), 'gameType must be either 0 or 1'
-
-UserSchema.path('preferences.create.userType').validate ((num) ->
-  num == 0 or num == 1
-), 'userType must be either 0 or 1'
-
-UserSchema.path('preferences.create.fieldType').validate ((num) ->
-  num >= 0 and num <= 2
-), 'fieldType must be either 0, 1 or 2'
-
-UserSchema.path('preferences.create.balls').validate ((num) ->
-  num >= 0
-), 'balls can\'t be negative'
-
-UserSchema.path('preferences.create.rackets').validate ((num) ->
-  num >= 0
-), 'rackets can\'t be negative'
-
-UserSchema.path('preferences.create.skillLevel').validate ((num) ->
-  num >= 0 and num <= 5
-), 'skillLevel has to be between 0 and 5'
 
 mongoose.model 'User', UserSchema
