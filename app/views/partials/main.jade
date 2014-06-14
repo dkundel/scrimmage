@@ -15,7 +15,7 @@
           i.fa.fa-lg.pull-right.fa-facebook-square.fa-center
     .row.loggedIn(ng-class="{hidden: !loggedIn}")
       .profile-image.col-xs-2
-        img(src="https://graph.facebook.com/898122570204099/picture?type=large").img-responsive.img-circle
+        img(ng-src="https://graph.facebook.com/{{userInfo.id}}/picture?type=large").img-responsive.img-circle
       .profile-content.col-xs-8
         p.lead
           span(ng-bind="userInfo.name")
@@ -24,7 +24,7 @@
           br
           span.btn.btn-default.btn-sm.btn-block(ng-click="logOut()") Log Out
       .profile-league.col-xs-2
-        span.fa.fa-trophy.fa-4x.fa-white(ng-click="league()")
+        span.fa.fa-trophy.fa-4x.fa-white.league-button(ng-click="league()")
 
 .map-area.row
   .col-sm-12.col-md-10.col-md-offset-1

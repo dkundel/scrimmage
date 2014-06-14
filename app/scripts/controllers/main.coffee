@@ -9,7 +9,7 @@ angular.module('scrimmageApp')
       center: new google.maps.LatLng(-34.397, 150.644)
       zoom: 8
 
-    # Map.getCurrentLocation()
+    Map.getCurrentLocation()
     Map.getEvents()
 
     $scope.logIn = () ->

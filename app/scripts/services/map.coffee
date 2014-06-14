@@ -20,7 +20,7 @@ angular.module('scrimmageApp')
             @currentPos = resp.coords
             @lastPosTime = resp.timestamp 
             @centerMap()
-        navigator.geolocation.getCurrentLocation callback
+        navigator.geolocation.getCurrentPosition callback
 
     @getEvents = () =>
       console.log "Apply Magic"
