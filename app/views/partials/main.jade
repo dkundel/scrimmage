@@ -1,22 +1,30 @@
 //- div(ng-include='\'partials/navbar\'')
 
-.profile-info-short.row.btn-success
+.show-profile-button.btn-success(ng-click="show()", ng-class="{hidden: !profileHidden}")
+  h2.fa.fa-chevron-down.fa-lg.fa-white
+
+.profile-info-short.row.btn-success(ng-click="hide()", ng-class="{hidden: profileHidden}")
   .col-xs-12.col-md-10.col-md-offset-1
-    .row.notLoggedIn
+    .row.notLoggedIn(ng-class="{hidden: loggedIn}")
       .col-xs-6
         p.lead.text-center.scrimmage-title.
           scrimmage
       .col-xs-6
-        a.btn.btn-primary.btn-lg(src="javascript:void(0);").btn-big
+        a.btn.btn-primary.btn-lg.btn-big(src="javascript:void(0);", ng-click="logIn()")
           span Log In Via
           i.fa.fa-lg.pull-right.fa-facebook-square.fa-center
-    .row.loggedIn.hidden
+    .row.loggedIn(ng-class="{hidden: !loggedIn}")
       .profile-image.col-xs-2
-        img(src="https://graph.facebook.com/898122570204099/picture")
+        img(src="https://graph.facebook.com/898122570204099/picture?type=large").img-responsive.img-circle
       .profile-content.col-xs-8
-        h1 Name
+        p.lead
+          span(ng-bind="userInfo.name")
+          br
+          span(ng-bind="userInfo.id")
+          br
+          span.btn.btn-default.btn-sm.btn-block(ng-click="logOut()") Log Out
       .profile-league.col-xs-2
-        span.fa.fa-trophy.fa-4x
+        span.fa.fa-trophy.fa-4x.fa-white(ng-click="league()")
 
 .map-area.row
   .col-sm-12.col-md-10.col-md-offset-1
@@ -24,7 +32,7 @@
 
 .bottom-button-area
   .row
-    .col-xs-6.btn-success.bottom-button
+    .col-xs-6.btn-success.bottom-button(ng-click="create()")
       span Create
-    .col-xs-6.btn-success.bottom-button
+    .col-xs-6.btn-success.bottom-button(ng-click="search()")
       span Search

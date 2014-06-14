@@ -38,4 +38,14 @@ angular.module('scrimmageApp')
         user = {}
         loggedIn = false
 
+    @login = () =>
+      FB.login()
+
+    @checkLogIn = () =>
+      FB.getLoginStatus (response) =>
+        if response.status is 'connected'
+          @fetchUser()
+        else
+          loggedIn = false
+
     return

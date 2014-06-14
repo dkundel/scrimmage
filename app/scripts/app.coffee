@@ -29,7 +29,7 @@ angular.module('scrimmageApp', [
     $rootScope.$watch(() -> 
       FBUser.loggedIn()
     , (status) ->
-      $rootScope.user = FBUser.getUser()
+      $rootScope.userInfo = FBUser.getUser()
       $rootScope.loggedIn = status
       window.rootS = $rootScope
     )
@@ -42,3 +42,4 @@ angular.module('scrimmageApp', [
         version    : 'v2.0'
       }
       FBUser.watchAuthChange()
+      FBUser.checkLogIn()

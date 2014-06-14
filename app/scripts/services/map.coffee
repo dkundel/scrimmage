@@ -22,4 +22,7 @@ angular.module('scrimmageApp')
             @centerMap()
         navigator.geolocation.getCurrentLocation callback
 
+    @getEvents = () =>
+      console.log "Apply Magic"
+
     return
