@@ -1,5 +1,12 @@
 'use strict'
 
+window.fbAsyncInit = () ->
+  FB.init {
+    appId      : '1559501997610150',
+    xfbml      : true,
+    version    : 'v2.0'
+  }
+
 angular.module('scrimmageApp', [
   'ngCookies',
   'ngResource',
@@ -16,3 +23,22 @@ angular.module('scrimmageApp', [
         redirectTo: '/'
 
     $locationProvider.html5Mode true
+
+  .run ($rootScope, $location, $http, FBUser) ->
+
+    $rootScope.$watch(() -> 
+      FBUser.loggedIn()
+    , (status) ->
+      $rootScope.user = FBUser.getUser()
+      $rootScope.loggedIn = status
+      window.rootS = $rootScope
+    )
+
+
+    window.fbAsyncInit = () ->
+      FB.init {
+        appId      : '1559501997610150',
+        xfbml      : true,
+        version    : 'v2.0'
+      }
+      FBUser.watchAuthChange()

@@ -1,5 +1,7 @@
 div(ng-include='\'partials/navbar\'')
 
+#fb-root
+
 .jumbotron
   h1
     | 'Allo, 'Allo!
@@ -10,7 +12,8 @@ div(ng-include='\'partials/navbar\'')
     | Always a pleasure scaffolding your apps.
   p
     a.btn.btn-lg.btn-success(ng-href='#') Splendid!
-    
+  h4(ng-class="{hidden: !loggedIn}") {{user.name}}
+  img(ng-src="https://graph.facebook.com/{{user.id}}/picture")
 .row.marketing
   div(ng-repeat='thing in awesomeThings')
     h4 {{thing.name}}
