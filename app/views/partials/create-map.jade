@@ -4,7 +4,7 @@
       scrimmage
 .create-screen.row
   .col-xs-10.col-xs-offset-1
-    h1 Choose Location
+    h1 Choose Location {{addressDetails}}
     .form-group
       label(for="description") Description
       input#addressSearch.form-control(ng-model="addressResult", ng-autocomplete="addressResult", details="addressDetails", options="addressOptions")
@@ -19,14 +19,14 @@
     .form-group
       label(for="time") Time
       input#timePicker.form-control(type="time", ng-model="time")
-    
+
 .bottom-button-area
   .row
     .col-xs-6.btn-danger.bottom-button(ng-click="cancel()")
-      span 
+      span
         span.fa.fa-chevron-left.fa-white.fa-lg
         | &nbsp; &nbsp;Cancel
     .col-xs-6.btn-success.bottom-button(ng-click="next()")
-      span 
+      span
         | Next&nbsp; &nbsp;
         span.fa.fa-chevron-right.fa-white.fa-lg
