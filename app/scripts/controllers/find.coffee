@@ -1,7 +1,12 @@
 'use strict'
 
 angular.module('scrimmageApp')
-  .controller 'FindCtrl', ($scope, $http) ->
+  .controller 'FindCtrl', ($scope, $location, $http) ->
+
+    $scope.back = () ->
+      $location.path('/')
+      event.stopPropagation()
+
     $scope.search = {}
     $scope.search.time = "foo"
     $scope.radioModel = 'Left'
