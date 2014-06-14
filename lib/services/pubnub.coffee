@@ -18,7 +18,7 @@ msg_session_cancelled =   'session_cancelled'
 msg_kicked_from_session = 'kicked_from_session'
 msg_send_message =        'send_message'
 msg_receive_message =     'receive_message'
-msg_receive_messages =    'receive_messages'
+msg_receive_session =     'receive_session'
 msg_get_user_info =       'get_user_info'
 
 # --------------------------------------------------------------------------
@@ -119,8 +119,8 @@ pubnub.subscribe
               message:
                 user: message.user
                 session: message.session
-                type: msg_receive_messages
-                messages: session.messages
+                type: msg_receive_session
+                messages: session
               callback: SentSuccessful
               error: SentError
 
