@@ -4,7 +4,7 @@ Schema = mongoose.Schema
 
 UserSchema = new Schema(
   identifier:
-    type: String
+    type: Number
     unique: true
     requird: true
   preferences:
