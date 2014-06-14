@@ -18,7 +18,7 @@ angular.module('scrimmageApp')
         channel: channel
         message: msg
 
-    @subscribe = (channel, callback, options)
+    @subscribe = (channel, callback, options) =>
       options ?= {}
       options.channel = channel
       options.message = callback
