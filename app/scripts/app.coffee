@@ -18,7 +18,21 @@ angular.module('scrimmageApp', [
       .when '/',
         templateUrl: 'partials/main'
         controller: 'MainCtrl'
-      
+      .when '/find',
+        templateUrl: 'partials/find'
+        controller: 'FindCtrl'
+      .when '/create',
+        templateUrl: 'partials/create'
+        controller: 'CreateCtrl'
+      .when '/manage',
+        templateUrl: 'partials/manage'
+        controller: 'ManageCtrl'
+      .when '/league',
+        templateUrl: 'partials/league'
+        controller: 'LeagueCtrl'
+      .when '/profile',
+        templateUrl: 'partials/profile'
+        controller: 'ProfileCtrl'
       .otherwise
         redirectTo: '/'
 
@@ -26,7 +40,7 @@ angular.module('scrimmageApp', [
 
   .run ($rootScope, $location, $http, FBUser) ->
 
-    $rootScope.$watch(() -> 
+    $rootScope.$watch(() ->
       FBUser.loggedIn()
     , (status) ->
       $rootScope.user = FBUser.getUser()

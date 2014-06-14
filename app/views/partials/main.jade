@@ -4,14 +4,14 @@ div(ng-include='\'partials/navbar\'')
 
 .jumbotron
   h1
-    | 'Allo, 'Allo!
+    | Scrimmage!
 
   p.lead
     <img src="images/yeoman.png" alt="I'm Yeoman">
     br
-    | Always a pleasure scaffolding your apps.
+    | Find people to play sports with.
   p
-    a.btn.btn-lg.btn-success(ng-href='#') Splendid!
+    a.btn.btn-lg.btn-success(ng-href='#') Get started!
   h4(ng-class="{hidden: !loggedIn}") {{user.name}}
   img(ng-src="https://graph.facebook.com/{{user.id}}/picture")
 .row.marketing
@@ -20,4 +20,4 @@ div(ng-include='\'partials/navbar\'')
     p {{thing.info}}
 
 .footer
-  p ♥ from the Yeoman team
+  p ♥ from the Scrimmage team
