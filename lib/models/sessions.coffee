@@ -8,7 +8,7 @@ SessionSchema = new Schema(
     type: Schema.Types.ObjectId
     required: true
     unique: true
-  admin: String
+  admin: Number
   description: String
   userType:
     type: String
@@ -39,7 +39,14 @@ SessionSchema = new Schema(
   location:
     type: String
     required: true
-  users: [String]
+  users: [Number]
+  messages: [
+    user:
+      id: Number
+      first_name: String
+    content: String
+    date: Date
+  ]
 )
 
 mongoose.model 'Session', SessionSchema

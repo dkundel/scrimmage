@@ -18,6 +18,7 @@ msg_session_cancelled =   'session_cancelled'
 msg_kicked_from_session = 'kicked_from_session'
 msg_send_message =        'send_message'
 msg_receive_message =     'receive_message'
+msg_receive_messages =    'receive_messages'
 msg_get_user_info =       'get_user_info'
 
 # --------------------------------------------------------------------------
@@ -43,6 +44,8 @@ IsFull = (type, size) ->
 # Message Template
 # --------------------------------------------------------------------------
 # { type: 'type', user: 'facebook_id', ... }
+# OR
+# { type: 'type', session: 'session_identifier', user: 'facebook_id', ... }
 
 # --------------------------------------------------------------------------
 # Client Events
@@ -111,7 +114,15 @@ pubnub.subscribe
           if err
             ServerError err
           else
-            session.users.push(message.user).unique()
+            session.users.push message.user
+            channel: channel_server
+              message:
+                user: message.user
+                session: message.session
+                type: msg_receive_messages
+                messages: session.messages
+              callback: SentSuccessful
+              error: SentError
 
       when msg_leave_session, msg_remove_user then do ->
         Session.findById message.session, (err, session) ->
@@ -143,9 +154,23 @@ pubnub.subscribe
                   error: SentError
 
       when msg_send_message then do ->
+        Session.findById message.session, (err, session) ->
+          if err
+            ServerError err
+          else
+            session.messages.push(message.data)
+            pubnub.publish
+              channel: channel_server
+              message:
+                user: message.user
+                session: message.session
+                type: msg_receive_message
+                data: message.data
+              callback: SentSuccessful
+              error: SentError
 
       when msg_get_user_info then do ->
-        Session.find identifier: message.user, (err, user) ->
+        User.find identifier: message.user, (err, user) ->
           if err
             ServerError err
           else
