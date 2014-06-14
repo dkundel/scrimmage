@@ -24,10 +24,14 @@ angular.module('scrimmageApp')
       event.stopPropagation()
 
     $scope.next = () =>
-      Event.submitEvent 
-        location: 
+      Event.submitEvent
+        location:
           lat: $scope.addressDetails.geometry.location.k
           long: $scope.addressDetails.geometry.location.A
           address: $scope.addressDetails.formatted_address
         time: $scope.time
         date: $scope.date
+
+    $scope.home = () =>
+      $location.path('/')
+      event.stopPropagation()

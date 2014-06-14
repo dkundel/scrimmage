@@ -4,6 +4,10 @@ angular.module('scrimmageApp')
   .controller 'ChatCtrl', ($scope, $rootScope, $routeParams, $http, PubNub) ->
     $scope.id = $routeParams.id
 
+    $scope.home = () =>
+      $location.path('/')
+      event.stopPropagation()
+
     $scope.messages = [
       user:
         id: 898122570204099
@@ -32,7 +36,7 @@ angular.module('scrimmageApp')
     ,
       id: 898122570204099
       first_name: 'Dominik'
-    , 
+    ,
       id: 898122570204099
       first_name: 'Dominik'
     ,
@@ -56,8 +60,8 @@ angular.module('scrimmageApp')
 
     $scope.sendMsg = () =>
       console.log 'msg', $scope.newMessage
-      msg = 
-        user: 
+      msg =
+        user:
           first_name: $rootScope.userInfo.first_name
           id: $rootScope.userInfo.id
         content: $scope.newMessage

@@ -41,6 +41,10 @@ angular.module('scrimmageApp')
         $scope.geoLocation = new google.maps.LatLng details.geometry.location.k, details.geometry.location.A
         Map.markAndZoom $scope.geoLocation
 
+    $scope.home = () =>
+      $location.path('/')
+      event.stopPropagation()
+
     $scope.cancel = () =>
       $location.path('/create')
       event.stopPropagation()

@@ -27,3 +27,7 @@ angular.module('scrimmageApp')
     $scope.toggleTerrain = (color) =>
       $scope.terrain = color
       event.stopPropagation()
+
+    $scope.home = () =>
+      $location.path('/')
+      event.stopPropagation()

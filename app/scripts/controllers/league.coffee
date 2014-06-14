@@ -50,6 +50,9 @@ angular.module('scrimmageApp')
       place: 10
     ]
 
+    $scope.home = () =>
+      $location.path('/')
+      event.stopPropagation()
 
       #    $http.get('/api/awesomeThings').success (awesomeThings) ->
   #      $scope.awesomeThings = awesomeThings
