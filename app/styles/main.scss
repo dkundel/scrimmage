@@ -2,6 +2,11 @@ $icon-font-path: "/bower_components/bootstrap-sass-official/vendor/assets/fonts/
 
 @import 'bootstrap-sass-official/vendor/assets/stylesheets/bootstrap';
 
+$fa-font-path: "/bower_components/font-awesome/fonts";
+@import "font-awesome/scss/font-awesome";
+
+@import 'variables';
+
 .browsehappy {
     margin: 0.2em 0;
     background: #ccc;
@@ -66,6 +71,9 @@ body {
 .marketing p + h4 {
     margin-top: 28px;
 }
+
+@import "reset";
+@import "home";
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {

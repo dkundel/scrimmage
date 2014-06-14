@@ -1,0 +1,50 @@
+.profile-info-short {
+  // background: $primary-color;
+  color: $text-primary-color;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  // padding: 0;
+  // position: fixed;
+  // width: 100%;
+}
+
+.scrimmage-title {
+  font-size: 2rem;
+  vertical-align: middle;
+  line-height: 2;
+  margin: 0;
+  padding: 0;
+  // font-style: italic;
+}
+
+.fa-center {
+  vertical-align: middle;
+}
+
+.map-area {
+  height: 100%;
+  
+  .col-sm-12.col-md-10.col-md-offset-1 {
+    height: 100%;
+  }
+
+  #googleMap {
+    min-height: 100%;
+    // background: black;
+  }
+}
+
+.bottom-button-area {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.bottom-button {
+  padding: 2rem;
+  text-align: center;
+}
+
+.btn-big {
+  width: 90%;
+}

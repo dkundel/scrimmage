@@ -4,7 +4,7 @@ angular.module('scrimmageApp')
   .service 'Map', () ->
     # AngularJS will instantiate a singleton by calling "new" on this function
 
-    @initialize = (id, options) =>
+    @init = (id, options) =>
       @options = options
       @mapId = id
       @map = new google.maps.Map (document.getElementById id), options
