@@ -1,0 +1,34 @@
+.selector-rows {
+  margin-bottom: 2rem;
+  .col-xs-6 {
+    padding: 2rem;
+    span {
+      text-align: center;
+      font-size: 2rem;
+    }
+  }
+}
+
+.clay-color {
+  .fa-square {
+    color: blue;
+  }
+}
+
+.grass-color {
+  .fa-square {
+    color: green;
+  }
+}
+
+.hard-color {
+  .fa-square {
+    color: red;
+  }
+}
+
+.reset-well {
+  background-color: inherit;
+  box-shadow: inherit;
+  border: 0;
+}
