@@ -1,15 +1,28 @@
+.row.btn-success
+  .col-xs-12.col-md-10.col-md-offset-1
+    p.lead.text-center.scrimmage-title.
+      scrimmage
+.create-screen.row
+  .col-xs-10.col-xs-offset-1
+    h1 Search Game
 .row
   .col-sm-12.col-md-10.col-md-offset-1.findbuttons
     .row.selector-rows
-      .col-xs-6.btn-success.findbuttons.bottom-button(ng-class="{active: ranked}", ng-click="ranked = true")
-        span Ranked
-      .col-xs-6.btn-success.findbuttons.bottom-button(ng-class="{active: !ranked}", ng-click="ranked = false")
-        span Casual
+      .col-xs-6.btn-success.text-center(ng-class="{active: ranked}", ng-click="ranked = true")
+        span.fa.fa-trophy.fa-white.fa-lg
+        span &nbsp; &nbsp;Ranked
+      .col-xs-6.btn-success.text-center(ng-class="{active: !ranked}", ng-click="ranked = false")
+        span Casual&nbsp; &nbsp;
+        span.fa.fa-smile-o.fa-white.fa-lg
     .row.selector-rows
-      .col-xs-6.btn-success.findbuttons.bottom-button(ng-class="{active: single}", ng-click="single = true")
-        span Singles
-      .col-xs-6.btn-success.findbuttons.bottom-button(ng-class="{active: !single}", ng-click="single = false")
-        span Doubles
+      .col-xs-6.btn-success.text-center(ng-class="{active: single}", ng-click="single = true")
+        span.fa.fa-male.fa-white.fa-lg
+        span &nbsp; &nbsp;Single
+      .col-xs-6.btn-success.text-center(ng-class="{active: !single}", ng-click="single = false")
+        span Double&nbsp; &nbsp;
+        span.fa.fa-male.fa-white.fa-lg
+        |&nbsp;
+        span.fa.fa-male.fa-white.fa-lg
     .row
       .col-xs-12.btn-success.bottom-button(ng-click="create()")
         .input-group
@@ -18,18 +31,23 @@
     .row
       .col-xs-6.btn-success.bottom-button(ng-click="create()")
         span Date
-    //- .row
-    //-   .col-xs-6.btn-success.bottom-button(ng-click="create()")
-    //-     span Time
-    //-       .input-append.bootstrap-timepicker.timepick
-    //-         input#timepicker1.input-small(type='text')
-    //-         span.add-on
-    //-           i.icon-time
-    //-       script(type='text/javascript').
-    //-         $('#timepicker1').timepicker();
+        //- .row
+        //-   .col-xs-6.btn-success.bottom-button(ng-click="create()")
+        //-     span Time
+        //-       .input-append.bootstrap-timepicker.timepick
+        //-         input#timepicker1.input-small(type='text')
+        //-         span.add-on
+        //-           i.icon-time
+        //-       script(type='text/javascript').
+        //-         $('#timepicker1').timepicker();
     br
+  .bottom-button-area
     .row
-      .col-xs-6.btn-success.bottom-button(ng-click="back()")
-        span Back
-      .col-xs-6.btn-success.bottom-button(ng-click="back()")
-        span Search
+      .col-xs-6.btn-danger.bottom-button(ng-click="back()")
+        span
+          span.fa.fa-chevron-left.fa-white.fa-lg
+          | &nbsp; &nbsp;Back
+      .col-xs-6.btn-success.bottom-button(ng-click="next()")
+        span
+          | Search&nbsp; &nbsp;
+          span.fa.fa-chevron-right.fa-white.fa-lg
