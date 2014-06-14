@@ -5,6 +5,7 @@ angular.module('scrimmageApp')
     # AngularJS will instantiate a singleton by calling "new" on this function
 
     @init = (id, options) =>
+      delete @map
       @options = options
       @mapId = id
       @map = new google.maps.Map (document.getElementById id), options
@@ -24,5 +25,15 @@ angular.module('scrimmageApp')
 
     @getEvents = () =>
       console.log "Apply Magic"
+
+    @markAndZoom = (coords) =>
+      if @markerVenue?
+        @markerVenue.setMap null
+        delete @markerVenue
+      @map.panTo coords
+      @markerVenue = new google.maps.Marker 
+        map: @map
+        position: coords
+        title: 'Venue'
 
     return

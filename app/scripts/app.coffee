@@ -11,7 +11,8 @@ angular.module('scrimmageApp', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
-  'ngRoute'
+  'ngRoute',
+  'ngAutocomplete'
 ])
   .config ($routeProvider, $locationProvider) ->
     $routeProvider
@@ -21,6 +22,9 @@ angular.module('scrimmageApp', [
       .when '/find',
         templateUrl: 'partials/find'
         controller: 'FindCtrl'
+      .when '/create/location',
+        templateUrl: 'partials/create-map'
+        controller: 'CreateMapCtrl'
       .when '/create',
         templateUrl: 'partials/create'
         controller: 'CreateCtrl'

@@ -29,11 +29,11 @@
 
 
     .row.text-center.selector-rows
-      .col-xs-6
+      .col-xs-6.well(ng-class="{'reset-well': racket}", ng-click="racket = racket ? false : true")
         span.fa.fa-5x.fa-facebook
         br
         span Racket Available
-      .col-xs-6
+      .col-xs-6.well(ng-class="{'reset-well': balls}", ng-click="balls = balls ? false : true")
         span.fa.fa-5x.fa-facebook
         br
         span Balls Available

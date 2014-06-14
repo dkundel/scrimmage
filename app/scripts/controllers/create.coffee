@@ -8,7 +8,7 @@ angular.module('scrimmageApp')
     $scope.skill = 0
     $scope.racket = false
     $scope.balls = false
-    $scope.terrain = ''
+    $scope.terrain = 'clay'
 
     $scope.next = () =>
       Event.setTemp

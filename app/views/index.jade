@@ -41,6 +41,7 @@ html.no-js
       s.parentNode.insertBefore(g,s)}(document,'script'));
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAs02u7FwWsGRiSTMAnAVALyoTrkhGMLBI"></script>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
     <script src="http://cdn.pubnub.com/pubnub.min.js"></script>
 
     <!-- build:js(app) scripts/vendor.js -->
@@ -51,8 +52,10 @@ html.no-js
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/ngAutocomplete/src/ngAutocomplete.js"></script>
     <!-- endbower -->
     <script src="scripts/services/event.js"></script>
+    <script src="scripts/controllers/createmap.js"></script>
     <!-- endbuild -->
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="scripts/app.js"></script>
@@ -60,6 +63,7 @@ html.no-js
     <script src="scripts/controllers/find.js"></script>
     <script src="scripts/controllers/navbar.js"></script>
     <script src="scripts/controllers/create.js"></script>
+    <script src="scripts/controllers/createmap.js"></script>
     <script src="scripts/controllers/league.js"></script>
     <script src="scripts/controllers/manage.js"></script>
     <script src="scripts/services/fbuser.js"></script>
