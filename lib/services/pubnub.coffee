@@ -65,8 +65,14 @@ pubnub.subscribe
           message.session
 
       when msg_connect_client then do ->
-        # TODO: create user if he doesn't exist yet
-        console.log message.identifier, ' connected!'
+        User.count
+          identifier: message.user, (err, count) ->
+            if err
+              ServerError err
+            else if count == 0
+              User.create
+                identifier: message.user, (err, user) ->
+                  ServerError err if err
 
       when msg_get_sessions then do ->
         Session.find message.data.settings, (err, sessions) ->
@@ -128,19 +134,29 @@ pubnub.subscribe
                 user isnt message.user
               if message.type is msg_remove_user
                 pubnub.publish
-                channel: channel_server
-                message:
-                  user: message.user
-                  type: msg_kicked_from_session
-                  session: session
-                callback: SentSuccessful
-                error: SentError
+                  channel: channel_server
+                  message:
+                    user: message.user
+                    type: msg_kicked_from_session
+                    session: session
+                  callback: SentSuccessful
+                  error: SentError
 
       when msg_send_message then do ->
-        console.log message
 
       when msg_get_user_info then do ->
-        console.log message
+        Session.find identifier: message.user, (err, user) ->
+          if err
+            ServerError err
+          else
+            pubnub.publish
+              channel: channel_server
+              message:
+                user: message.user
+                type: msg_get_user_info
+                info: user
+              callback: SentSuccessful
+              error: SentError
 
       else
         console.log 'Unknown client message \'', message, '\' received.'
