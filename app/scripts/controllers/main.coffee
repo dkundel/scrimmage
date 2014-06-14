@@ -6,7 +6,7 @@ angular.module('scrimmageApp')
     profileHidden = false
 
     Map.init 'googleMap',
-      center: new google.maps.LatLng(-34.397, 150.644)
+      center: new google.maps.LatLng(51.509, -0.125)
       zoom: 8
 
     Map.getCurrentLocation()

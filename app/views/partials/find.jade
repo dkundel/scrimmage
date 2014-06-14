@@ -6,7 +6,7 @@
   .col-xs-10.col-xs-offset-1
     h1 Search Game
 .row
-  .col-sm-12.col-md-10.col-md-offset-1.findbuttons
+  .col-xs-10.col-xs-offset-1.findbuttons
     .row.selector-rows
       .col-xs-6.btn-success.text-center(ng-class="{active: ranked}", ng-click="ranked = true")
         span.fa.fa-trophy.fa-white.fa-lg
@@ -29,17 +29,19 @@
           span.input-group-addon Radius in km
             input.form-control(ng-model="radius", ng-model-instant, type='text', placeholder='Radius in km')
     .row
-      .col-xs-6.btn-success.bottom-button(ng-click="create()")
-        span Date
-        //- .row
-        //-   .col-xs-6.btn-success.bottom-button(ng-click="create()")
-        //-     span Time
-        //-       .input-append.bootstrap-timepicker.timepick
-        //-         input#timepicker1.input-small(type='text')
-        //-         span.add-on
-        //-           i.icon-time
-        //-       script(type='text/javascript').
-        //-         $('#timepicker1').timepicker();
+      .col-xs-6.btn-success.text-center()
+        label(for="date") Date
+        input#datePicker.form-control(type="date", ng-model="date")
+      .col-xs-6.btn-success.text-center()
+        label(for="time") Time
+        input#timePicker.form-control(type="time", ng-model="time")
+    .row
+      .col-xs-12.btn-success.text-center()
+        .form-group
+          input#addressSearch.form-control(ng-model="addressResult", ng-autocomplete="addressResult", details="addressDetails", options="addressOptions")
+        .mapContainer
+          #googleMap
+
     br
   .bottom-button-area
     .row
