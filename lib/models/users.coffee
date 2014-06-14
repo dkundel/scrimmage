@@ -3,7 +3,7 @@ mongoose = require('mongoose')
 Schema = mongoose.Schema
 
 UserSchema = new Schema(
-  facebookID: String
+  facebookIdentifier: String
   preferences:
     search:
       gameType: Number
@@ -55,7 +55,7 @@ UserSchema.path('preferences.create.rackets').validate ((num) ->
 ), 'rackets can\'t be negative'
 
 UserSchema.path('preferences.create.skillLevel').validate ((num) ->
-  num >= 1 and num <= 5
-), 'skillLevel has to be between 1 and 5'
+  num >= 0 and num <= 5
+), 'skillLevel has to be between 0 and 5'
 
 mongoose.model 'User', UserSchema
