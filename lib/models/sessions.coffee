@@ -8,6 +8,7 @@ SessionSchema = new Schema(
     type: Schema.Types.ObjectId
     required: true
     unique: true
+  admin: String
   description: String
   userType:
     type: String
@@ -27,12 +28,10 @@ SessionSchema = new Schema(
     max: 5
     required: true
   rackets:
-    type: Number
-    min: 0
+    type: Boolean
     required: true
   balls:
-    type: Number
-    min: 0
+    type: Boolean
     required: true
   date:
     type: Date
@@ -40,6 +39,7 @@ SessionSchema = new Schema(
   location:
     type: String
     required: true
+  users: [String]
 )
 
 mongoose.model 'Session', SessionSchema
