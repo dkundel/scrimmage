@@ -1,0 +1,19 @@
+.row.btn-success
+  .col-xs-12.col-md-10.col-md-offset-1
+    p.lead.text-center.scrimmage-title.
+      scrimmage
+.create-screen.row
+  .col-xs-10.col-xs-offset-1
+    h1 Create Game
+    .form-group
+      label(for="description") Description
+      textarea#description.form-control(rows="5", ng-model="description")
+
+    .row.selector-rows
+      .col-xs-6.btn-success.text-center(ng-class="{active: ranked}", ng-click="ranked = true")
+        span Ranked
+      .col-xs-6.btn-success.text-center(ng-class="{active: !ranked}", ng-click="ranked = false")
+        span Casual
+
+
+
