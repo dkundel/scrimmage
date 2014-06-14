@@ -11,9 +11,54 @@
 
     .row.selector-rows
       .col-xs-6.btn-success.text-center(ng-class="{active: ranked}", ng-click="ranked = true")
-        span Ranked
+        span.fa.fa-trophy.fa-white.fa-lg
+        span &nbsp; &nbsp;Ranked
       .col-xs-6.btn-success.text-center(ng-class="{active: !ranked}", ng-click="ranked = false")
-        span Casual
+        span Casual&nbsp; &nbsp;
+        span.fa.fa-smile-o.fa-white.fa-lg
+
+    .row.selector-rows
+      .col-xs-6.btn-success.text-center(ng-class="{active: single}", ng-click="single = true")
+        span.fa.fa-male.fa-white.fa-lg
+        span &nbsp; &nbsp;Single
+      .col-xs-6.btn-success.text-center(ng-class="{active: !single}", ng-click="single = false")
+        span Double&nbsp; &nbsp;
+        span.fa.fa-male.fa-white.fa-lg
+        |&nbsp;
+        span.fa.fa-male.fa-white.fa-lg
 
 
+    .row.text-center.selector-rows
+      .col-xs-6
+        span.fa.fa-5x.fa-facebook
+        br
+        span Racket Available
+      .col-xs-6
+        span.fa.fa-5x.fa-facebook
+        br
+        span Balls Available
 
+    .row.text-center.selector-rows
+      .col-xs-4.well(ng-class="{'reset-well': (terrain!=='clay')}", ng-click="toggleTerrain('clay')").clay-color
+        span.fa.fa-5x.fa-square
+        br
+        span Clay
+      .col-xs-4.well(ng-class="{'reset-well': (terrain!=='grass')}", ng-click="toggleTerrain('grass')").grass-color
+        span.fa.fa-5x.fa-square
+        br
+        span Grass
+      .col-xs-4.well(ng-class="{'reset-well': (terrain!=='hard')}", ng-click="toggleTerrain('hard')").hard-color
+        span.fa.fa-5x.fa-square
+        br
+        span Hard Terrain
+
+.bottom-button-area
+  .row
+    .col-xs-6.btn-danger.bottom-button(ng-click="cancel()")
+      span 
+        span.fa.fa-chevron-left.fa-white.fa-lg
+        | &nbsp; &nbsp;Cancel
+    .col-xs-6.btn-success.bottom-button(ng-click="next()")
+      span 
+        | Next&nbsp; &nbsp;
+        span.fa.fa-chevron-right.fa-white.fa-lg

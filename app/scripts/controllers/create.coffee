@@ -23,3 +23,7 @@ angular.module('scrimmageApp')
 
     $scope.cancel = () =>
       $location.path('/')
+
+    $scope.toggleTerrain = (color) =>
+      $scope.terrain = color
+      event.stopPropagation()
