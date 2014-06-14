@@ -19,4 +19,7 @@ angular.module('scrimmageApp')
       window.scrollTo 0, 0
     # AngularJS will instantiate a singleton by calling "new" on this function
 
+    @join = (id) =>
+      console.log 'Join Event'
+
     return

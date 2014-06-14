@@ -1,0 +1,60 @@
+.row.btn-success.top-row-shadow
+  .col-xs-12.col-md-10.col-md-offset-1
+    p.lead.text-center.scrimmage-title.
+      scrimmage
+
+.row.margin-row
+  .col-xs-10.col-xs-offset-1.text-center
+    p.lead(ng-bind="event.location.address")
+    p
+      | by: &nbsp;
+      span(ng-bind="event.organizer.name")
+      img(ng-src="https://graph.facebook.com/{{userInfo.id}}/picture?width=200&height=200").img-responsive.img-circle.img-organizer
+    p
+      | On:&nbsp;
+      span(ng-bind="event.date")
+      | &nbsp;at&nbsp;
+      span(ng-bind="event.time")
+
+.row.margin-row
+  .col-xs-10.col-xs-offset-1
+    .well
+      p(ng-bind="event.description")
+
+
+.row
+  .col-xs-10.col-xs-offset-1
+    .row.text-center.margin-row
+      .col-xs-6.well(ng-class="{'reset-well': event.racket}")
+        span.fa.fa-5x.fa-facebook
+        br
+        span Racket Available
+      .col-xs-6.well(ng-class="{'reset-well': event.balls}")
+        span.fa.fa-5x.fa-facebook
+        br
+        span Balls Available
+
+    .row.text-center.margin-row
+      .col-xs-4.well(ng-class="{'reset-well': (event.terrain!=='clay')}").clay-color
+        span.fa.fa-5x.fa-square
+        br
+        span Clay
+      .col-xs-4.well(ng-class="{'reset-well': (event.terrain!=='grass')}").grass-color
+        span.fa.fa-5x.fa-square
+        br
+        span Grass
+      .col-xs-4.well(ng-class="{'reset-well': (event.terrain!=='hard')}").hard-color
+        span.fa.fa-5x.fa-square
+        br
+        span Hard Terrain
+
+.bottom-button-area
+  .row
+    .col-xs-6.btn-danger.bottom-button(ng-click="back()")
+      span 
+        span.fa.fa-chevron-left.fa-white.fa-lg
+        | &nbsp; &nbsp;Back
+    .col-xs-6.btn-success.bottom-button(ng-click="join()")
+      span 
+        | Join&nbsp; &nbsp;
+        span.fa.fa-chevron-right.fa-white.fa-lg
