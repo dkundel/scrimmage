@@ -1,18 +1,20 @@
 .row
   .col-sm-12.col-md-10.col-md-offset-1.findbuttons
-    .row
-      .col-xs-6.btn-success.findbuttons.bottom-button(ng-click="create()")
+    .row.selector-rows
+      .col-xs-6.btn-success.findbuttons.bottom-button(ng-class="{active: ranked}", ng-click="ranked = true")
         span Ranked
-      .col-xs-6.btn-success.bottom-button(ng-click="search()")
+      .col-xs-6.btn-success.findbuttons.bottom-button(ng-class="{active: !ranked}", ng-click="ranked = false")
         span Casual
-    .row
-      .col-xs-6.btn-success.bottom-button(ng-click="create()")
+    .row.selector-rows
+      .col-xs-6.btn-success.findbuttons.bottom-button(ng-class="{active: single}", ng-click="single = true")
         span Singles
-      .col-xs-6.btn-success.bottom-button(ng-click="search()")
+      .col-xs-6.btn-success.findbuttons.bottom-button(ng-class="{active: !single}", ng-click="single = false")
         span Doubles
     .row
-      .col-xs-6.btn-success.bottom-button(ng-click="create()")
-        span Search Radius in km
+      .col-xs-12.btn-success.bottom-button(ng-click="create()")
+        .input-group
+          span.input-group-addon Radius in km
+            input.form-control(ng-model="radius", ng-model-instant, type='text', placeholder='Radius in km')
     .row
       .col-xs-6.btn-success.bottom-button(ng-click="create()")
         span Date
@@ -31,5 +33,3 @@
         span Back
       .col-xs-6.btn-success.bottom-button(ng-click="back()")
         span Search
-
-
