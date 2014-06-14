@@ -25,7 +25,6 @@ angular.module('scrimmageApp')
       event.stopPropagation()
 
     $scope.search = () ->
-      console.log '??'
       $location.path('/find')
       event.stopPropagation()
 
@@ -40,6 +39,6 @@ angular.module('scrimmageApp')
     $scope.league = () ->
       $location.path('/league')
       event.stopPropagation()
-    
+
     # $http.get('/api/awesomeThings').success (awesomeThings) ->
     #   $scope.awesomeThings = awesomeThings

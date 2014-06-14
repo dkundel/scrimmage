@@ -1,56 +1,35 @@
 .row
   .col-sm-12.col-md-10.col-md-offset-1.findbuttons
+    .row.selector-rows
+      .col-xs-6.btn-success.findbuttons.bottom-button(ng-class="{active: ranked}", ng-click="ranked = true")
+        span Ranked
+      .col-xs-6.btn-success.findbuttons.bottom-button(ng-class="{active: !ranked}", ng-click="ranked = false")
+        span Casual
+    .row.selector-rows
+      .col-xs-6.btn-success.findbuttons.bottom-button(ng-class="{active: single}", ng-click="single = true")
+        span Singles
+      .col-xs-6.btn-success.findbuttons.bottom-button(ng-class="{active: !single}", ng-click="single = false")
+        span Doubles
     .row
-      .col-xs-12
-        .btn-group-justified(data-toggle='buttons')
-          label.btn.btn-primary.btn-lg.active
-            input#option1(type='radio', name='options')
-            | Ranked
-          label.btn.btn-primary.btn-lg
-            input#option2(type='radio', name='options')
-            | Casual
+      .col-xs-12.btn-success.bottom-button(ng-click="create()")
+        .input-group
+          span.input-group-addon Radius in km
+            input.form-control(ng-model="radius", ng-model-instant, type='text', placeholder='Radius in km')
     .row
-      .col-xs-12
-        .btn-group-justified(data-toggle='buttons')
-          label.btn.btn-primary.btn-lg.active
-            input#option1(type='radio', name='options')
-            | Singles
-          label.btn.btn-primary.btn-lg
-            input#option2(type='radio', name='options')
-            | Doubles
-    .row
-      .col-xs-12
-        .btn-group-justified(data-toggle='buttons')
-          label.btn.btn-primary.btn-lg
-            input#option1(type='radio', name='options')
-            | Search Radius in km
-    .row
-      .col-xs-12
-        .btn-group-justified(data-toggle='buttons')
-          label.btn.btn-primary.btn-lg
-            input#option1(type='radio', name='options')
-            | Date
-    .row
-      .col-xs-12
-        .btn-group-justified(data-toggle='buttons')
-          label.btn.btn-primary.btn-lg
-            input#option1(type='radio', name='options')
-            | Time: {{search.time}}
-            .input-append.bootstrap-timepicker.timepick
-              input#timepicker1.input-small(type='text')
-              span.add-on
-                i.icon-time
-            script(type='text/javascript').
-              $('#timepicker1').timepicker();
+      .col-xs-6.btn-success.bottom-button(ng-click="create()")
+        span Date
+    //- .row
+    //-   .col-xs-6.btn-success.bottom-button(ng-click="create()")
+    //-     span Time
+    //-       .input-append.bootstrap-timepicker.timepick
+    //-         input#timepicker1.input-small(type='text')
+    //-         span.add-on
+    //-           i.icon-time
+    //-       script(type='text/javascript').
+    //-         $('#timepicker1').timepicker();
     br
     .row
-      .col-xs-12
-        .btn-group-justified(data-toggle='buttons')
-          label.btn.btn-primary.btn-lg
-            input#option1(type='radio', name='options')
-            | Search
-          label.btn.btn-primary.btn-lg
-            input#option2(type='radio', name='options')
-            | Cancel
-
-
+      .col-xs-6.btn-success.bottom-button(ng-click="back()")
+        span Back
+      .col-xs-6.btn-success.bottom-button(ng-click="back()")
+        span Search
