@@ -28,7 +28,7 @@ msg_get_league_statistics =   'get_league_statistics'
 
 # --------------------------------------------------------------------------
 # Error Handling Functions
-# -------------------------------------------------------------------------- 
+# --------------------------------------------------------------------------
 SentSuccessful = (e) ->
   console.log 'SUCCESS!', e
 
@@ -59,7 +59,7 @@ GetRandomStatistic = () ->
 
 # --------------------------------------------------------------------------
 # Client Events
-# -------------------------------------------------------------------------- 
+# --------------------------------------------------------------------------
 pubnub.subscribe
   channel: channel_client
   callback: (message) ->
@@ -96,11 +96,10 @@ pubnub.subscribe
             else
               User.findOne
                 id: message.user.id, (err, user) ->
-                  unless user.statistics?
-                    user.statistics = {}
-                    user.statistics.won = GetRandomStatistic()
-                    user.statistics.tied = GetRandomStatistic()
-                    user.statistics.lost = GetRandomStatistic()
+                  user.statistics ?= {}
+                  user.statistics.won ?= GetRandomStatistic()
+                  user.statistics.tied ?= GetRandomStatistic()
+                  user.statistics.lost ?= GetRandomStatistic()
                   user.save () ->
                     console.log 'Saved'
                     pubnub.publish
@@ -251,9 +250,9 @@ pubnub.subscribe
             session.save () ->
               if err
                 ServerError
-              else 
+              else
                 pubnub.publish
-                  channel: channel_server + '/chat/' + message.session 
+                  channel: channel_server + '/chat/' + message.session
                   message: message.data
                   callback: SentSuccessful
                   error: SentError
