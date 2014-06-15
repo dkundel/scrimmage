@@ -101,9 +101,23 @@ pubnub.subscribe
                     user.statistics.won = GetRandomStatistic()
                     user.statistics.tied = GetRandomStatistic()
                     user.statistics.lost = GetRandomStatistic()
-                    user.save () ->
-                      console.log 'Saved'
-                      return
+                  user.save () ->
+                    console.log 'Saved'
+                    pubnub.publish
+                      channel: 'server/connect_client/'+user.id
+                      message:
+                        user:
+                          id: user.id
+                          name: user.name
+                          first_name: user.first_name
+                          statistics:
+                            won: user.statistics.won
+                            tied: user.statistics.tied
+                            lost: user.statistics.lost
+                      callback: SentSuccessful
+                      error: SentError
+
+                    return
 
       when msg_get_sessions then do ->
         currentLocation = message.data.settings.position

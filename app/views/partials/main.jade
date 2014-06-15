@@ -20,7 +20,8 @@
         p.lead
           span(ng-bind="userInfo.name")
           br
-          span(ng-bind="userInfo.id")
+          span(ng-class="{hidden: !userInfo.statistics}")
+            | Won: {{userInfo.statistics.won}} Tied: {{userInfo.statistics.tied}} Lost: {{userInfo.statistics.lost}}
           br
           span.btn.btn-default.btn-sm.btn-block(ng-click="logOut()") Log Out
       .profile-league.col-xs-2

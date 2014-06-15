@@ -33,6 +33,9 @@ angular.module('scrimmageApp')
             first_name: response.first_name
           type: 'connect_client'
 
+        PubNub.subscribe 'server/connect_client/' + response.id, (msg) =>
+          $rootScope.$apply () =>
+            $rootScope.userInfo.statistics = msg.user.statistics
         PubNub.publish 'client', message
 
     @watchAuthChange = () =>
