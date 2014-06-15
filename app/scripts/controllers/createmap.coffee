@@ -10,7 +10,7 @@ angular.module('scrimmageApp')
     $scope.date = (dateNow.getMonth() + 1) + '/' + (dateNow.getDate()) + '/' + (dateNow.getFullYear())
 
     Map.init 'googleMap',
-#      center: new google.maps.LatLng(51.509, -0.125) --> doesn't show something before location has loaded
+      center: new google.maps.LatLng(51.509, -0.125)
       zoom: 8
 
     Map.getCurrentLocation()
