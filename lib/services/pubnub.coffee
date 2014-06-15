@@ -59,11 +59,10 @@ counter = 0
 
 CreateDummyUser = (name, first_name) ->
   counter += 1
-  User.create { identifier: counter, name: name, firstName: first_name}, (err, user) ->
+  User.create { id: counter, name: name, first_name: first_name}, (err, user) ->
     if err
       ServerError err
     else
-      session.admin = message.user.id
       user.statistics ?= {}
       user.statistics.won ?= GetRandomStatistic()
       user.statistics.tied ?= GetRandomStatistic()
