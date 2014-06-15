@@ -52,6 +52,33 @@ GetRandomStatistic = () ->
   Math.round (Math.random() * (max - min) + min)
 
 # --------------------------------------------------------------------------
+# Dummy users
+# --------------------------------------------------------------------------
+
+counter = 0
+
+CreateDummyUser = (name, first_name) ->
+  counter += 1
+  User.create { identifier: counter, name: name, firstName: first_name}, (err, user) ->
+    if err
+      ServerError err
+    else
+      session.admin = message.user.id
+      user.statistics ?= {}
+      user.statistics.won ?= GetRandomStatistic()
+      user.statistics.tied ?= GetRandomStatistic()
+      user.statistics.lost ?= GetRandomStatistic()
+      user.save () ->
+        console.log 'Saved'
+
+CreateDummyUser('Black', 'Joe')
+CreateDummyUser('Smith', 'John')
+CreateDummyUser('Maarten', 'Tom')
+CreateDummyUser('Jannsens', 'Roy')
+CreateDummyUser('Maarten', 'Nick')
+CreateDummyUser('Strong', 'Jef')
+
+# --------------------------------------------------------------------------
 # Message Template
 # --------------------------------------------------------------------------
 # { type: 'type', user: 'facebook_id', ... }
