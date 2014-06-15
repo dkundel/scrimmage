@@ -9,9 +9,9 @@
   .col-xs-10.col-xs-offset-1.findbuttons
     .table
       .thead
-        .tr(ng-repeat="user in users")
-          .col-xs-12.btn-success.bottom-button(ng-class="{'btn-success1':$index===0, 'btn-success2':$index===1, 'btn-success3':$index>=2, 'btn-success4more':$index>=3}").text-left
-            span {{$index+1}} &nbsp; &nbsp; {{user.points}} &nbsp;
+        .tr(ng-repeat="user in users").text-left
+          .col-xs-12.btn-success.bottom-button(ng-class="{'btn-success1':$index===0, 'btn-success2':$index===1, 'btn-success3':$index>=2, 'btn-success4more':$index>=3}")
+            span {{$index+1}} &nbsp; &nbsp; &nbsp;
             span.fa.fa-trophy.fa-white.fa-lg
             span &nbsp; &nbsp;{{user.name}}
 
