@@ -33,7 +33,7 @@ UserSchema = new Schema(
         enum: ['S', 'D']
       fieldType:
         type: String
-        enum: ['H', 'G', 'C']
+        #enum: ['H', 'G', 'C']
       balls: Boolean
       rackets: Boolean
       skillLevel:

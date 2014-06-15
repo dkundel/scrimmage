@@ -105,7 +105,7 @@ angular.module('scrimmageApp')
 
     $scope.getCurrentPosition = () =>
       Map.getCurrentLocation (resp) =>
-        $scope.search.addressResult = "London"
+        $scope.search.addressResult = "London, United Kingdom"
         $scope.search.position =
           lat: resp.coords.latitude
           long: resp.coords.longitude
