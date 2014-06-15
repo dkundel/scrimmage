@@ -108,8 +108,13 @@ pubnub.subscribe
           if err
             ServerError err
           else
-            open_sessions = sessions.filter (session) ->
-              not IsFull session.userType, session.users.length
+            field_types = session.fieldType.split ''
+            console.log session.fieldType
+            open_sessions = []
+            for type, i in field_types
+              session.fieldType = type
+              open_sessions = open_sessions.merge sessions.filter (session) ->
+                not IsFull session.userType, session.users.length
             if currentLocation?.lat and currentLocation?.long
               console.log '???'
               filteredByDistance = open_sessions.filter (session) ->
