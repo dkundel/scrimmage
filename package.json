@@ -15,7 +15,8 @@
     "mongoose": "~3.8.8",
     "morgan": "~1.0.0",
     "pubnub": "^3.6.4",
-    "static-favicon": "~1.0.1"
+    "static-favicon": "~1.0.1",
+    "underscore": "^1.6.0"
   },
   "devDependencies": {
     "connect-livereload": "~0.3.0",

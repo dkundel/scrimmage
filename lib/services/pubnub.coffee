@@ -1,5 +1,6 @@
 Session = require('../models/sessions')
 User = require('../models/users')
+_ = require('underscore')
 
 pubnub = require('pubnub').init(
   publish_key: 'pub-c-b4096ce5-10e7-4674-9cbc-7f1393edf2be'
@@ -296,6 +297,8 @@ pubnub.subscribe
                 points: user.statistics.won * 2 + user.statistics.tied
                 name: user.name
                 first_name: user.first_name
+            statistics = _.sortBy statistics, (entry) ->
+              return -entry.points
             pubnub.publish
               channel: channel_server + '/' + msg_get_league_statistics + '/' + message.user.id
               message:
