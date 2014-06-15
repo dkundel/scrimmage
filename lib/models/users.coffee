@@ -7,6 +7,12 @@ UserSchema = new Schema(
     type: Number
     unique: true
     requird: true
+  name:
+    type: String
+    required: true
+  firstName:
+    type: String
+    required: true
   preferences:
     search:
       gameType:

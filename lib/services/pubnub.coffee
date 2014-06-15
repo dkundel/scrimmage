@@ -9,21 +9,22 @@ pubnub = require('pubnub').init(
 channel_client = 'client'
 channel_server = 'server'
 
-msg_create_session =      'create_session'
-msg_edit_session =        'edit_session'
-msg_connect_client =      'connect_client'
-msg_get_sessions =        'get_sessions'
-msg_get_open_sessions =   'get_open_sessions'
-msg_join_session =        'join_session'
-msg_get_session =        'get_session'
-msg_leave_session =       'leave_session'
-msg_remove_user =         'remove_user'
-msg_session_cancelled =   'session_cancelled'
-msg_kicked_from_session = 'kicked_from_session'
-msg_send_message =        'send_message'
-msg_receive_message =     'receive_message'
-msg_receive_session =     'receive_session'
-msg_get_user_info =       'get_user_info'
+msg_create_session =          'create_session'
+msg_edit_session =            'edit_session'
+msg_connect_client =          'connect_client'
+msg_get_sessions =            'get_sessions'
+msg_get_open_sessions =       'get_open_sessions'
+msg_join_session =            'join_session'
+msg_get_session =             'get_session'
+msg_leave_session =           'leave_session'
+msg_remove_user =             'remove_user'
+msg_session_cancelled =       'session_cancelled'
+msg_kicked_from_session =     'kicked_from_session'
+msg_send_message =            'send_message'
+msg_receive_message =         'receive_message'
+msg_receive_session =         'receive_session'
+msg_get_user_info =           'get_user_info'
+msg_get_league_statistics =   'get_league_statistics'
 
 # --------------------------------------------------------------------------
 # Error Handling Functions
@@ -226,7 +227,7 @@ pubnub.subscribe
           if err
             ServerError err
           else
-            session.messages.push(message.data)
+            session.messages.push message.data
             session.save () ->
               if err
                 ServerError
@@ -248,6 +249,25 @@ pubnub.subscribe
                 user: message.user
                 type: msg_get_user_info
                 info: user
+              callback: SentSuccessful
+              error: SentError
+
+      when msg_get_league_statistics then do ->
+        User.find {}, (err, users) ->
+          if err
+            ServerError err
+          else
+            statistics = []
+            for user, i in users
+              statistics.push
+                identifier: user.identifier
+                points: user.statistics.won * 2 + user.statistics.tied
+                name: user.name
+                firstName: user.firstName
+            pubnub.publish
+              channel: channel_server + '/' + msg_get_user_info + '/' + message.user.id
+              message:
+                users: statistics
               callback: SentSuccessful
               error: SentError
 
