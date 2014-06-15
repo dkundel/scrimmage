@@ -3,7 +3,7 @@
 angular.module('scrimmageApp')
   .controller 'ChatCtrl', ($scope, $rootScope, $location, $routeParams, $http, Event, PubNub) ->
     $scope.id = $routeParams.id
-
+    colorMatch = {}
     # Event.fetchInfo $scope.id
 
     $scope.$watch () -> 
@@ -13,6 +13,15 @@ angular.module('scrimmageApp')
         console.log eventInfo
         $scope.messages = eventInfo.messages
         $scope.participants = eventInfo.users
+        for p, i in $scope.participants
+            colorMatch[p.id] = 'red' if i is 0
+            colorMatch[p.id] = 'blue' if i is 1
+            colorMatch[p.id] = 'green' if i is 2
+            colorMatch[p.id] = 'purple' if i is 3
+
+        for m in $scope.messages
+            m.color = colorMatch[m.user.id]
+
 
     $rootScope.$watch () ->
       return $rootScope.loggedIn
@@ -74,6 +83,7 @@ angular.module('scrimmageApp')
     console.log newMessageChannel
     PubNub.subscribe newMessageChannel, (m) =>
       $scope.$apply () =>
+        m.color = colorMatch[m.user.id]
         $scope.messages.push m
 
     $scope.sendMsg = () =>
