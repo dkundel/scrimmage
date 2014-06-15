@@ -1,5 +1,6 @@
 Session = require('../models/sessions')
 User = require('../models/users')
+_ = require('underscore')
 
 pubnub = require('pubnub').init(
   publish_key: 'pub-c-b4096ce5-10e7-4674-9cbc-7f1393edf2be'
@@ -49,6 +50,33 @@ GetRandomStatistic = () ->
   max = 42
   min = 0
   Math.round (Math.random() * (max - min) + min)
+
+# --------------------------------------------------------------------------
+# Dummy users
+# --------------------------------------------------------------------------
+
+counter = 0
+
+CreateDummyUser = (name, first_name) ->
+  counter += 1
+  User.create { identifier: counter, name: name, firstName: first_name}, (err, user) ->
+    if err
+      ServerError err
+    else
+      session.admin = message.user.id
+      user.statistics ?= {}
+      user.statistics.won ?= GetRandomStatistic()
+      user.statistics.tied ?= GetRandomStatistic()
+      user.statistics.lost ?= GetRandomStatistic()
+      user.save () ->
+        console.log 'Saved'
+
+CreateDummyUser('Black', 'Joe')
+CreateDummyUser('Smith', 'John')
+CreateDummyUser('Maarten', 'Tom')
+CreateDummyUser('Jannsens', 'Roy')
+CreateDummyUser('Maarten', 'Nick')
+CreateDummyUser('Strong', 'Jef')
 
 # --------------------------------------------------------------------------
 # Message Template
@@ -186,14 +214,26 @@ pubnub.subscribe
               session.save (err) ->
                 console.log err
                 pubnub.publish
-                  channel: channel_server + '/' + msg_receive_session + '/' + message.user.id + '/joined'
+                  channel: channel_server + '/' + msg_receive_session + '/' + u.id + '/joined'
                   message:
-                    user: message.user
+                    user: u
                     session: session
                     type: msg_receive_session
                     messages: session
                   callback: SentSuccessful
                   error: SentError
+                for u, i in session.users
+                  if i+1 is session.users.length
+                    return
+                  pubnub.publish
+                    channel: channel_server + '/' + msg_receive_session + '/' + u.id
+                    message:
+                      user: u
+                      session: session
+                      type: msg_receive_session
+                      messages: session
+                    callback: SentSuccessful
+                    error: SentError
 
       when msg_get_session then do ->
         Session.findById message.session, (err, session) ->
@@ -283,6 +323,8 @@ pubnub.subscribe
                 points: user.statistics.won * 2 + user.statistics.tied
                 name: user.name
                 first_name: user.first_name
+            statistics = _.sortBy statistics, (entry) ->
+              return -entry.points
             pubnub.publish
               channel: channel_server + '/' + msg_get_league_statistics + '/' + message.user.id
               message:
