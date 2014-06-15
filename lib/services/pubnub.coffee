@@ -213,7 +213,7 @@ pubnub.subscribe
               session.save (err) ->
                 console.log err
                 pubnub.publish
-                  channel: channel_server + '/' + msg_receive_session + '/' + u.id + '/joined'
+                  channel: channel_server + '/' + msg_receive_session + '/' + message.user.id + '/joined'
                   message:
                     user: u
                     session: session
