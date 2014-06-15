@@ -31,7 +31,7 @@ angular.module('scrimmageApp')
     oldSearch = JSON.parse(JSON.stringify($scope.search))
 
     Map.init 'googleMap',
-    #  center: new google.maps.LatLng(51.509, -0.125)
+      center: new google.maps.LatLng(51.509, -0.125)
       zoom: 8
 
     Map.getCurrentLocation()
