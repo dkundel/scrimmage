@@ -19,6 +19,8 @@ angular.module('scrimmageApp')
           $rootScope.eventInfo = transformBack(msg.session)
           console.log msg.session
 
+      
+
       PubNub.subscribe 'server/receive_session/' + $rootScope.userInfo.id + '/joined', (msg) =>
         unless msg.session?
           $location.path '/'
@@ -26,6 +28,24 @@ angular.module('scrimmageApp')
         $rootScope.$apply () ->
           $location.path '/event/' + msg.session._id + '/chat'
 
+    @updateSearch = (search) =>
+      PubNub.subscribe 'server/get_open_sessions', (msg) =>
+        $rootScope.$apply () ->
+          eventList = $rootScope.eventList = msg.sessions
+
+      console.log 'foo'
+      setTimeout () ->
+        message = 
+          type: 'get_sessions'
+          data:
+            settings: search
+          user: 
+            id: $rootScope.userInfo.id
+            name: $rootScope.userInfo.name
+            first_name: $rootScope.userInfo.first_name
+
+        PubNub.publish 'client', message
+      , 1000
 
 
     @getInfo = () =>

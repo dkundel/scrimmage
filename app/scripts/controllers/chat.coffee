@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module('scrimmageApp')
-  .controller 'ChatCtrl', ($scope, $rootScope, $routeParams, $http, Event, PubNub) ->
+  .controller 'ChatCtrl', ($scope, $rootScope, $location, $routeParams, $http, Event, PubNub) ->
     $scope.id = $routeParams.id
 
     # Event.fetchInfo $scope.id

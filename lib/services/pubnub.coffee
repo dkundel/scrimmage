@@ -92,18 +92,32 @@ pubnub.subscribe
                   ServerError err if err
 
       when msg_get_sessions then do ->
+        currentLocation = message.data.settings.position
+        radius = message.data.settings.radius
+        delete message.data.settings.position
+        delete message.data.settings.radius
         Session.find message.data.settings, (err, sessions) ->
           if err
             ServerError err
           else
             open_sessions = sessions.filter (session) ->
-              IsFull session.userType, session.users.length
+              not IsFull session.userType, session.users.length
+            if currentLocation?.lat and currentLocation?.long
+              console.log '???'
+              filteredByDistance = open_sessions.filter (session) ->
+                x = (session.location.long - currentLocation.long) * Math.cos ((session.location.lat + currentLocation.lat)/2)
+                y = (session.location.lat - currentLocation.lat)
+                d = Math.sqrt (Math.pow(x, 2) + Math.pow(y, 2)) * 6731 * 1.60934
+                return d <= radius
+            else
+              filteredByDistance = open_sessions
+
             pubnub.publish
-              channel: channel_server + '/' + msg_get_sessions
+              channel: channel_server + '/' + msg_get_open_sessions
               message:
                 user: message.user
                 type: msg_get_open_sessions
-                sessions: open_sessions
+                sessions: filteredByDistance
               callback: SentSuccessful
               error: SentError
 

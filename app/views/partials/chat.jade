@@ -2,7 +2,7 @@
   .col-xs-12.col-md-10.col-md-offset-1(ng-click="home()")
     img.img-responsive.logocent(src="/images/logo.png" width=200)
 .row
-  .col-xs-10.btn-danger.bottom-button
+  .col-xs-10.btn-danger.bottom-button(ng-click="home()")
     span Cancel
   .col-xs-2.btn-success.bottom-button
     span.fa.fa-white.fa-lg.fa-gear
@@ -29,6 +29,6 @@
     .col-xs-12.btn-success.bottom-button
       form(ng-submit="sendMsg()")
         .input-group
-          input.form-control(type="chattext", placeholder="Type your message...", ng-model="newMessage")
+          input.form-control(name="chattext", placeholder="Type your message...", ng-model="newMessage")
           span.input-group-btn
             button.btn.btn-default(type="submit") Send
