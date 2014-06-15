@@ -5,6 +5,9 @@ angular.module('scrimmageApp')
     $scope.addressResult = ''
     $scope.addressDetails = {}
     $scope.addressOptions = null
+    dateNow = new Date()
+    $scope.time = dateNow.getHours() + ':' + dateNow.getMinutes()
+    $scope.date = (dateNow.getMonth() + 1) + '/' + (dateNow.getDate()) + '/' + (dateNow.getFullYear())
 
     Map.init 'googleMap',
       center: new google.maps.LatLng(51.509, -0.125)

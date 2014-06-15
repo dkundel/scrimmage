@@ -7,9 +7,7 @@ angular.module('scrimmageApp')
     eventList = []
 
     @registerListeners = () =>
-      PubNub.subscribe 'server/create_session/' + $rootScope.userInfo.id, (msg) =>
-        $location.path '/event/'+msg.id+'/chat'
-        window.scrollTo 0,0
+      
 
       PubNub.subscribe 'server/receive_session/' + $rootScope.userInfo.id, (msg) =>
         unless msg.session?
@@ -120,21 +118,28 @@ angular.module('scrimmageApp')
 
 
     @submitEvent = (moreInfo) =>
-      tempInfo.location = moreInfo.location
-      tempInfo.time = moreInfo.time
-      tempInfo.date = moreInfo.date
+      PubNub.subscribe 'server/create_session/' + $rootScope.userInfo.id, (msg) =>
+        $rootScope.$apply () ->
+          $location.path '/event/'+msg.id+'/chat'
+          window.scrollTo 0,0
 
-      eventData = transformData()
+      setTimeout () =>
+        tempInfo.location = moreInfo.location
+        tempInfo.time = moreInfo.time
+        tempInfo.date = moreInfo.date
 
-      message = 
-        session: eventData
-        type: 'create_session'
-        user: 
-          id: $rootScope.userInfo.id
-          first_name: $rootScope.userInfo.first_name
-          name: $rootScope.userInfo.name
+        eventData = transformData()
 
-      PubNub.publish 'client', message
+        message = 
+          session: eventData
+          type: 'create_session'
+          user: 
+            id: $rootScope.userInfo.id
+            first_name: $rootScope.userInfo.first_name
+            name: $rootScope.userInfo.name
+
+        PubNub.publish 'client', message
+      , 1000
 
       # $location.path '/event/1/chat'
       # window.scrollTo 0, 0
