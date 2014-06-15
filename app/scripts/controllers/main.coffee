@@ -6,7 +6,7 @@ angular.module('scrimmageApp')
     profileHidden = false
 
     Map.init 'googleMap',
-      center: new google.maps.LatLng(51.509, -0.125)
+#      center: new google.maps.LatLng(51.509, -0.125)
       zoom: 8
 
     Map.getCurrentLocation()
@@ -16,9 +16,9 @@ angular.module('scrimmageApp')
     , (loggedIn) ->
       if loggedIn
         console.log '!!!!'
-        Event.fetchAllSessions() 
+        Event.fetchAllSessions()
 
-    $scope.$watch () -> 
+    $scope.$watch () ->
       return $rootScope.eventList
     , (eventList) ->
       if eventList?

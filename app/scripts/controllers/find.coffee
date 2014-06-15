@@ -31,16 +31,16 @@ angular.module('scrimmageApp')
     oldSearch = JSON.parse(JSON.stringify($scope.search))
 
     Map.init 'googleMap',
-      center: new google.maps.LatLng(51.509, -0.125)
+    #  center: new google.maps.LatLng(51.509, -0.125)
       zoom: 8
 
-    # Map.getCurrentLocation()
+    Map.getCurrentLocation()
 
     $scope.$watch () =>
       return $scope.addressDetails
     , (details) =>
       if details?.geometry?.location?
-        $scope.search.position = 
+        $scope.search.position =
           lat: details.geometry.location.k
           long: details.geometry.location.A
           address: details.formatted_address
@@ -63,7 +63,7 @@ angular.module('scrimmageApp')
     , (search) =>
       $scope.updateSearch()
 
-    $scope.$watch () -> 
+    $scope.$watch () ->
       return $rootScope.eventList
     , (eventList) ->
       if eventList?
@@ -90,7 +90,7 @@ angular.module('scrimmageApp')
         search.userType = if $scope.search.single then 'S' else 'D'
       if $scope.search.terrain.length > 0
         search.fieldType = $scope.search.terrain[0].toUpperCase()
-      search.skillLevel = 
+      search.skillLevel =
         $lte: $scope.search.skill
       if $scope.search.date?
         search.date = $scope.search.date
@@ -105,7 +105,8 @@ angular.module('scrimmageApp')
 
     $scope.getCurrentPosition = () =>
       Map.getCurrentLocation (resp) =>
-        $scope.search.position = 
+        $scope.search.addressResult = "London"
+        $scope.search.position =
           lat: resp.coords.latitude
           long: resp.coords.longitude
 

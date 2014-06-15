@@ -21,7 +21,8 @@ angular.module('scrimmageApp')
         unless typeof callback is 'function'
           callback = (resp) =>
             @currentPos = resp.coords
-            @lastPosTime = resp.timestamp 
+            @lastPosTime = resp.timestamp
+            console.log(resp)
             @centerMap()
         navigator.geolocation.getCurrentPosition callback
 
@@ -56,7 +57,7 @@ angular.module('scrimmageApp')
         @markerVenue.setMap null
         delete @markerVenue
       @map.panTo coords
-      @markerVenue = new google.maps.Marker 
+      @markerVenue = new google.maps.Marker
         map: @map
         position: coords
         title: 'Venue'
