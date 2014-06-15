@@ -214,15 +214,14 @@ pubnub.subscribe
               session.save (err) ->
                 console.log err
                 pubnub.publish
-                  pubnub.publish
-                    channel: channel_server + '/' + msg_receive_session + '/' + u.id + '/joined'
-                    message:
-                      user: u
-                      session: session
-                      type: msg_receive_session
-                      messages: session
-                    callback: SentSuccessful
-                    error: SentError
+                  channel: channel_server + '/' + msg_receive_session + '/' + u.id + '/joined'
+                  message:
+                    user: u
+                    session: session
+                    type: msg_receive_session
+                    messages: session
+                  callback: SentSuccessful
+                  error: SentError
                 for u, i in session.users
                   if i+1 is session.users.length
                     return
