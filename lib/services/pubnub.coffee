@@ -44,6 +44,11 @@ ServerError = (e) ->
 IsFull = (type, size) ->
   (type is 'S' and size is 2) or (type is 'D' and size is 4)
 
+GetRandomStatistic = () ->
+  max = 42
+  min = -13
+  Math.random() * (max - min) + min
+
 # --------------------------------------------------------------------------
 # Message Template
 # --------------------------------------------------------------------------
@@ -84,7 +89,14 @@ pubnub.subscribe
       when msg_connect_client then do ->
         User.update
           _id: message.user, _id: message.user, upsert: true, (err, user) ->
-            ServerError err if err
+            #hackstrong‬
+            if err
+              ServerError err
+            else
+              user.statistics.won = GetRandomStatistic()
+              user.statistics.tied = GetRandomStatistic()
+              user.statistics.lost = GetRandomStatistic()
+              user.save
 
       when msg_get_sessions then do ->
         currentLocation = message.data.settings.position
