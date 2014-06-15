@@ -36,7 +36,9 @@ angular.module('scrimmageApp')
         PubNub.subscribe 'server/connect_client/' + response.id, (msg) =>
           $rootScope.$apply () =>
             $rootScope.userInfo.statistics = msg.user.statistics
-        PubNub.publish 'client', message
+        setTimeout () ->
+          PubNub.publish 'client', message
+        , 1000
 
     @watchAuthChange = () =>
       FB.Event.subscribe 'auth.authResponseChange', (response) =>
