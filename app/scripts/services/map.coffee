@@ -1,8 +1,10 @@
 'use strict'
 
 angular.module('scrimmageApp')
-  .service 'Map', () ->
+  .service 'Map', ($rootScope, $location) ->
     # AngularJS will instantiate a singleton by calling "new" on this function
+
+    @markers = []
 
     @init = (id, options) =>
       delete @map
@@ -25,6 +27,29 @@ angular.module('scrimmageApp')
 
     @getEvents = () =>
       console.log "Apply Magic"
+
+    @showEvents = (events) =>
+      for m in @markers
+        m.setMap null
+        # delete m
+      @markers = []
+      if events?
+        for e in events
+          marker = new google.maps.Marker
+            map: @map
+            position: new google.maps.LatLng e.location.lat, e.location.long
+            title: e.location.address
+
+          google.maps.event.addListener marker, 'click', () =>
+            $rootScope.$apply () ->
+              path = '/event/' + e._id + '/overview'
+              console.log path
+              $location.path(path)
+              # window.scrollTo 0, 0
+
+          @markers.push marker
+
+
 
     @markAndZoom = (coords) =>
       if @markerVenue?

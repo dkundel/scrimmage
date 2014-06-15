@@ -4,10 +4,6 @@ mongoose = require('mongoose')
 Schema = mongoose.Schema
 
 SessionSchema = new Schema(
-  identifier:
-    type: Schema.Types.ObjectId
-    required: true
-    unique: true
   admin: Number
   description: String
   userType:
@@ -27,26 +23,36 @@ SessionSchema = new Schema(
     min: 0
     max: 5
     required: true
-  rackets:
+  racket:
     type: Boolean
     required: true
   balls:
     type: Boolean
     required: true
   date:
-    type: Date
-    required: true
-  location:
     type: String
     required: true
-  users: [Number]
+  time:
+    type: String
+    required: true
+  location:
+    lat: Number
+    long: Number
+    address: String
+  users: [
+    id: Number
+    name: String
+    first_name: String
+  ]
   messages: [
     user:
       id: Number
       first_name: String
     content: String
-    date: Date
+    date: 
+      type: Date
+      default: Date.now
   ]
 )
 
-mongoose.model 'Session', SessionSchema
+module.exports = mongoose.model 'Session', SessionSchema

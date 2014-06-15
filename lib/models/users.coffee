@@ -50,4 +50,4 @@ UserSchema = new Schema(
       min: 0
 )
 
-mongoose.model 'User', UserSchema
+module.exports = mongoose.model 'User', UserSchema

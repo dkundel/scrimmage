@@ -14,11 +14,15 @@ angular.module('scrimmageApp')
         subscribe_key: _subscribeKey
 
     @publish = (channel, msg) =>
+      unless @instance?
+        @init()
       @instance.publish
         channel: channel
         message: msg
 
     @subscribe = (channel, callback, options) =>
+      unless @instance?
+        @init()
       options ?= {}
       options.channel = channel
       options.message = callback

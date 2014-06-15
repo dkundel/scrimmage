@@ -48,7 +48,7 @@ angular.module('scrimmageApp', [
 
     $locationProvider.html5Mode true
 
-  .run ($rootScope, $location, $http, FBUser, PubNub) ->
+  .run ($rootScope, $location, $http, FBUser, PubNub, Event) ->
 
     $rootScope.$watch(() ->
       FBUser.loggedIn()

@@ -31,6 +31,7 @@ require('./lib/config/dummydata');
 var app = express();
 require('./lib/config/express')(app);
 require('./lib/routes')(app);
+require('./lib/services/pubnub');
 
 // Start server
 app.listen(config.port, config.ip, function () {

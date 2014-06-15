@@ -1,6 +1,8 @@
-.row.btn-success
-  .col-xs-12.col-md-10.col-md-offset-1(ng-click="home()")
-    img.img-responsive.logocent(src="/images/logo.png" width=200)
+.row.btn-success.top-row-shadow
+  .col-xs-12.col-md-10.col-md-offset-1
+    p.lead.text-center.scrimmage-title.
+      scrimmage
+
 .row.margin-row
   .col-xs-10.col-xs-offset-1.text-center
     p.lead(ng-bind="event.location.address")
@@ -22,6 +24,23 @@
 
 .row
   .col-xs-10.col-xs-offset-1
+    .row.selector-rows
+      .col-xs-6.btn-success.text-center(ng-class="{active: event.ranked}")
+        span.fa.fa-trophy.fa-white.fa-lg
+        span &nbsp; &nbsp;Ranked
+      .col-xs-6.btn-success.text-center(ng-class="{active: !event.ranked}")
+        span Casual&nbsp; &nbsp;
+        span.fa.fa-smile-o.fa-white.fa-lg
+
+    .row.selector-rows
+      .col-xs-6.btn-success.text-center(ng-class="{active: event.single}")
+        span.fa.fa-male.fa-white.fa-lg
+        span &nbsp; &nbsp;Single
+      .col-xs-6.btn-success.text-center(ng-class="{active: !event.single}")
+        span Double&nbsp; &nbsp;
+        span.fa.fa-male.fa-white.fa-lg
+        |&nbsp;
+        span.fa.fa-male.fa-white.fa-lg
     .row.text-center.margin-row
       .col-xs-6.well(ng-class="{'reset-well': event.racket}")
         span.fa.fa-5x.fa-facebook
@@ -49,10 +68,10 @@
 .bottom-button-area
   .row
     .col-xs-6.btn-danger.bottom-button(ng-click="back()")
-      span
+      span 
         span.fa.fa-chevron-left.fa-white.fa-lg
         | &nbsp; &nbsp;Back
     .col-xs-6.btn-success.bottom-button(ng-click="join()")
-      span
+      span 
         | Join&nbsp; &nbsp;
         span.fa.fa-chevron-right.fa-white.fa-lg

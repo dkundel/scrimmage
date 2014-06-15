@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module('scrimmageApp')
-  .controller 'MainCtrl', ($scope, $location, $http, FBUser, Map) ->
+  .controller 'MainCtrl', ($scope, $rootScope, $location, $http, FBUser, Map, Event) ->
 
     profileHidden = false
 
@@ -10,7 +10,20 @@ angular.module('scrimmageApp')
       zoom: 8
 
     Map.getCurrentLocation()
-    Map.getEvents()
+
+    $rootScope.$watch () ->
+      return $rootScope.loggedIn
+    , (loggedIn) ->
+      if loggedIn
+        console.log '!!!!'
+        Event.fetchAllSessions() 
+
+    $scope.$watch () -> 
+      return $rootScope.eventList
+    , (eventList) ->
+      if eventList?
+        console.log eventList
+        Map.showEvents eventList
 
     $scope.logIn = () ->
       FBUser.login()

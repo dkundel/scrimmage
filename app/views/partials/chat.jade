@@ -16,6 +16,8 @@
 .row.margin-row
   .col-xs-12
     .well.chat-messages
+      p(ng-class="{'hidden': (messages && messages.length !== 0)}")
+        | No messages yet...
       p(ng-repeat="m in messages")
         span.name(ng-bind="m.user.first_name")
         |: &nbsp;

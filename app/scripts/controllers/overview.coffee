@@ -1,8 +1,21 @@
 'use strict'
 
 angular.module('scrimmageApp')
-  .controller 'OverviewCtrl', ($scope, $location, $routeParams, $http, Event) ->
+  .controller 'OverviewCtrl', ($scope, $rootScope, $location, $routeParams, $http, Event) ->
     $scope.id = $routeParams.id
+
+    $rootScope.$watch () ->
+      return $rootScope.loggedIn
+    , (loggedIn) ->
+      if loggedIn
+        Event.fetchInfo $scope.id
+
+    $scope.$watch () -> 
+      return $rootScope.eventInfo
+    , (eventInfo) ->
+      if eventInfo?
+        console.log eventInfo
+        $scope.event = eventInfo
 
     $scope.event =
       location:

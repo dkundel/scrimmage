@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module('scrimmageApp')
-  .service 'FBUser', ($rootScope) ->
+  .service 'FBUser', ($rootScope, Event) ->
     # AngularJS will instantiate a singleton by calling "new" on this function
     user = {}
     loggedIn = false
@@ -13,6 +13,7 @@ angular.module('scrimmageApp')
         $rootScope.loggedIn = loggedIn
         $rootScope.userInfo = user
         window.FBUser = user
+        Event.registerListeners()
 
     @getUser = () =>
       user
