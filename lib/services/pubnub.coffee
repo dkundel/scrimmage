@@ -47,8 +47,8 @@ IsFull = (type, size) ->
 
 GetRandomStatistic = () ->
   max = 42
-  min = -13
-  Math.random() * (max - min) + min
+  min = 0
+  Math.round (Math.random() * (max - min) + min)
 
 # --------------------------------------------------------------------------
 # Message Template
@@ -89,15 +89,21 @@ pubnub.subscribe
 
       when msg_connect_client then do ->
         User.update
-          _id: message.user, _id: message.user, upsert: true, (err, user) ->
+          id: message.user.id, message.user, upsert: true, (err, user) ->
             #hackstrong‬
             if err
               ServerError err
             else
-              user.statistics.won = GetRandomStatistic()
-              user.statistics.tied = GetRandomStatistic()
-              user.statistics.lost = GetRandomStatistic()
-              user.save
+              User.findOne
+                id: message.user.id, (err, user) ->
+                  unless user.statistics?
+                    user.statistics = {}
+                    user.statistics.won = GetRandomStatistic()
+                    user.statistics.tied = GetRandomStatistic()
+                    user.statistics.lost = GetRandomStatistic()
+                    user.save () ->
+                      console.log 'Saved'
+                      return
 
       when msg_get_sessions then do ->
         currentLocation = message.data.settings.position
@@ -260,12 +266,12 @@ pubnub.subscribe
             statistics = []
             for user, i in users
               statistics.push
-                identifier: user.identifier
+                id: user.id
                 points: user.statistics.won * 2 + user.statistics.tied
                 name: user.name
-                firstName: user.firstName
+                first_name: user.first_name
             pubnub.publish
-              channel: channel_server + '/' + msg_get_user_info + '/' + message.user.id
+              channel: channel_server + '/' + msg_get_league_statistics + '/' + message.user.id
               message:
                 users: statistics
               callback: SentSuccessful

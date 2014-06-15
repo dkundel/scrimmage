@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module('scrimmageApp')
-  .service 'FBUser', ($rootScope, Event) ->
+  .service 'FBUser', ($rootScope, Event, PubNub) ->
     # AngularJS will instantiate a singleton by calling "new" on this function
     user = {}
     loggedIn = false
@@ -26,6 +26,14 @@ angular.module('scrimmageApp')
         user = response
         loggedIn = true
         @applyChanges()
+        message = 
+          user:
+            id: response.id
+            name: response.name
+            first_name: response.first_name
+          type: 'connect_client'
+
+        PubNub.publish 'client', message
 
     @watchAuthChange = () =>
       FB.Event.subscribe 'auth.authResponseChange', (response) =>

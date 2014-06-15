@@ -3,14 +3,13 @@ mongoose = require('mongoose')
 Schema = mongoose.Schema
 
 UserSchema = new Schema(
-  identifier:
+  id:
     type: Number
     unique: true
-    requird: true
   name:
     type: String
     required: true
-  firstName:
+  first_name:
     type: String
     required: true
   preferences:
