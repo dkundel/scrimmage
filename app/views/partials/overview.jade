@@ -8,8 +8,8 @@
     p.lead(ng-bind="event.location.address")
     p
       | by: &nbsp;
-      span(ng-bind="event.organizer.name")
-      img(ng-src="https://graph.facebook.com/{{userInfo.id}}/picture?width=200&height=200").img-responsive.img-circle.img-organizer
+      span(ng-bind="event.users[0].name")
+      img(ng-src="https://graph.facebook.com/{{event.users[0].id}}/picture?width=200&height=200").img-responsive.img-circle.img-organizer
     p
       | On:&nbsp;
       span(ng-bind="event.date")
