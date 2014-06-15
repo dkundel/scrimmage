@@ -27,6 +27,18 @@
         span.fa.fa-male.fa-white.fa-lg
 
 
+    .row.selector-rows
+      .col-xs-2.col-xs-offset-1
+        span.span.fa.fa-2x.fa-star(ng-click="skill=1")
+      .col-xs-2
+        span.span.fa.fa-2x(ng-class="{'fa-star': skill >= 2, 'fa-star-o': skill < 2}" ng-click="skill=2")
+      .col-xs-2
+        span.span.fa.fa-2x(ng-class="{'fa-star': skill >= 3, 'fa-star-o': skill < 3}" ng-click="skill=3")
+      .col-xs-2
+        span.span.fa.fa-2x(ng-class="{'fa-star': skill >= 4, 'fa-star-o': skill < 4}" ng-click="skill=4")
+      .col-xs-2
+        span.span.fa.fa-2x(ng-class="{'fa-star': skill >= 5, 'fa-star-o': skill < 5}" ng-click="skill=5")
+
     .row.text-center.selector-rows
       .col-xs-6.well(ng-class="{'reset-well': racket}", ng-click="racket = racket ? false : true")
         span.fa.fa-5x.fa-facebook

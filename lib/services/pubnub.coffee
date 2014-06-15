@@ -130,17 +130,29 @@ pubnub.subscribe
           if err
             ServerError err
           else
-            session.users.push message.user
-            session.save () ->
+            if IsFull session.userType, session.users.length
               pubnub.publish
-                channel: channel_server
+                channel: channel_server + '/' + msg_receive_session + '/' + message.user.id + '/joined'
                 message:
                   user: message.user
-                  session: message.session
+                  session: null
                   type: msg_receive_session
                   messages: session
                 callback: SentSuccessful
                 error: SentError
+            else
+              session.users.push message.user
+              session.save (err) ->
+                console.log err
+                pubnub.publish
+                  channel: channel_server + '/' + msg_receive_session + '/' + message.user.id + '/joined'
+                  message:
+                    user: message.user
+                    session: session
+                    type: msg_receive_session
+                    messages: session
+                  callback: SentSuccessful
+                  error: SentError
 
       when msg_get_session then do ->
         Session.findById message.session, (err, session) ->

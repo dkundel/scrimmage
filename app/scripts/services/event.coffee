@@ -11,6 +11,23 @@ angular.module('scrimmageApp')
         $location.path '/event/'+msg.id+'/chat'
         window.scrollTo 0,0
 
+      PubNub.subscribe 'server/receive_session/' + $rootScope.userInfo.id, (msg) =>
+        unless msg.session?
+          $location.path '/'
+          window.scrollTo 0,0
+        $rootScope.$apply () ->
+          $rootScope.eventInfo = transformBack(msg.session)
+          console.log msg.session
+
+      PubNub.subscribe 'server/receive_session/' + $rootScope.userInfo.id + '/joined', (msg) =>
+        unless msg.session?
+          $location.path '/'
+          window.scrollTo 0,0
+        $rootScope.$apply () ->
+          $location.path '/event/' + msg.session._id + '/chat'
+
+
+
     @getInfo = () =>
       eventInfo
 
@@ -36,13 +53,6 @@ angular.module('scrimmageApp')
     @fetchInfo = (id) =>
       # channel = 'server/receive_session/898122570204099'
       # channel = 'server/receive_session/' + $rootScope.userInfo.id
-      PubNub.subscribe 'server/receive_session/' + $rootScope.userInfo.id, (msg) =>
-        unless msg.session?
-          $location.path '/'
-          window.scrollTo 0,0
-        $rootScope.$apply () ->
-          $rootScope.eventInfo = transformBack(msg.session)
-          console.log msg.session
 
       setTimeout () ->
         message = 
@@ -112,5 +122,14 @@ angular.module('scrimmageApp')
 
     @join = (id) =>
       console.log 'Join Event'
+      message = 
+        type: 'join_session'
+        user: 
+          id: $rootScope.userInfo.id
+          first_name: $rootScope.userInfo.first_name
+          name: $rootScope.userInfo.name
+        session: id
+
+      PubNub.publish 'client', message
 
     return

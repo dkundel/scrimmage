@@ -5,7 +5,7 @@ angular.module('scrimmageApp')
     $scope.description = ''
     $scope.ranked = false
     $scope.single = true
-    $scope.skill = 0
+    $scope.skill = 1
     $scope.racket = false
     $scope.balls = false
     $scope.terrain = 'clay'

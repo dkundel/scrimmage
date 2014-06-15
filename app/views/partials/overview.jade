@@ -41,6 +41,19 @@
         span.fa.fa-male.fa-white.fa-lg
         |&nbsp;
         span.fa.fa-male.fa-white.fa-lg
+
+    .row.selector-rows
+      .col-xs-2.col-xs-offset-1
+        span.span.fa.fa-2x.fa-star
+      .col-xs-2
+        span.span.fa.fa-2x(ng-class="{'fa-star': event.skill >= 2, 'fa-star-o': event.skill < 2}")
+      .col-xs-2
+        span.span.fa.fa-2x(ng-class="{'fa-star': event.skill >= 3, 'fa-star-o': event.skill < 3}")
+      .col-xs-2
+        span.span.fa.fa-2x(ng-class="{'fa-star': event.skill >= 4, 'fa-star-o': event.skill < 4}")
+      .col-xs-2
+        span.span.fa.fa-2x(ng-class="{'fa-star': event.skill >= 5, 'fa-star-o': event.skill < 5}")
+
     .row.text-center.margin-row
       .col-xs-6.well(ng-class="{'reset-well': event.racket}")
         span.fa.fa-5x.fa-facebook
