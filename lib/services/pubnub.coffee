@@ -82,14 +82,9 @@ pubnub.subscribe
           message.session
 
       when msg_connect_client then do ->
-        User.count
-          _id: message.user, (err, count) ->
-            if err
-              ServerError err
-            else if count == 0
-              User.create
-                _id: message.user, (err, user) ->
-                  ServerError err if err
+        User.update
+          _id: message.user, _id: message.user, upsert: true, (err, user) ->
+            ServerError err if err
 
       when msg_get_sessions then do ->
         currentLocation = message.data.settings.position
